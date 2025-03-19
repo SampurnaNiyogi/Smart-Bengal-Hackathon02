@@ -32,12 +32,6 @@ def get_location(provider, branch):
     else:
         return jsonify({"error": "Location data not found"}), 404
 
-# Add a new product to a branch (Provider)
-@app.route('/add_product/<provider>/<branch>', methods=['POST'])
-def add_product(provider, branch):
-    data = request.json
-    db.collection("provider").document(provider).collection(branch).document().set(data)
-    return jsonify({"message": "Product added successfully!"})
 
 # Get Retailers Option
 @app.route('/get_providers', methods=['GET'])
@@ -50,7 +44,6 @@ def get_providers():
     return jsonify(provider_list)
 
 # Fetch all branches for a selected provider
-@app.route('/get_branches/<provider>', methods=['GET'])
 @app.route('/get_branches/<provider>', methods=['GET'])
 def get_branches(provider):
     try:
